@@ -31,7 +31,7 @@ $(document).ready(function () {
 
             answerIds.forEach((id) => {
                 const answerObj = {
-                    label: res['answer_' + id],
+                    label: res['answer_' + id].toUpperCase(),
                     score: res['answer_score_' + id]
 
                 };
@@ -68,7 +68,7 @@ $(document).ready(function () {
             answer_score_4: 10
         },
         {
-            question: "Who was the first Disney princess?",
+            question: "Who was the Third Disney princess?",
             answer_1: "Snow White",
             answer_score_1: 20,
             answer_2: "Ariel",
@@ -102,8 +102,12 @@ $(document).ready(function () {
     let timeCount = 30;
     let timer;
 
+    // Guess status
+    // let guessCorrect;
     // question index starts from 0
     let currentQuestionIndex = 0;
+    let currentQuestion;
+
 
     // Define score Array for three rounds.
     let scoreArray = [0, 0, 0];
@@ -112,10 +116,11 @@ $(document).ready(function () {
     // Count down function
     function countDown() {
         timeCount--;
+        //console.log("Count down: ", timeCount)
         $('#boardTimer').text(timeCount);
         if (timeCount === 0) {
             //alert("You've run out of time!")
-            timesUp();
+            timeUp();
             //timeCount = 30;
         }
     };
@@ -135,8 +140,9 @@ $(document).ready(function () {
     // Display question, hidden answers and guessed answers
     function displayQA() {
         // Define variable timer using setInterval, to count down every second.
-        // !!! this doesn't work!!!
-        timer = setInterval(countDown(), 1000);
+        // !!! this doesn't work!!! 
+        console.log("display function called");
+        timer = setInterval(countDown, 1000);
 
         // Display question and hidden answers
         question.text(questions[currentQuestionIndex].question);
@@ -159,10 +165,11 @@ $(document).ready(function () {
         // console.log('answers Array:', Object.values(questions[currentQuestionIndex]));
 
 
-        let currentQuestion = newQuestions[currentQuestionIndex];
+        currentQuestion = newQuestions[currentQuestionIndex];
         console.log("current QQ: ", currentQuestion);
 
         $('#add-playerAnswer').on('click', function (event) {
+            // prevent page refresh
             event.preventDefault();
             console.log("submit is triggered");
 
@@ -170,43 +177,77 @@ $(document).ready(function () {
             // let currentQuestion = newQuestions[currentQuestionIndex];
 
             // Deep clone answers array then change the score of the guessed answer to 0
-            // cited https://dev.to/samanthaming/how-to-deep-clone-an-array-in-javascript-3cig
-            let tempAnswers = [...currentQuestion.answers]
-            console.log("Temporary Answers", tempAnswers);
+            // Cited https://dev.to/samanthaming/how-to-deep-clone-an-array-in-javascript-3cig
+
+            // !!! This should be changed
+            // let tempAnswers = [...currentQuestion.answers]
+            // console.log("Temporary Answers", tempAnswers);
 
 
             // Loop through the answers in newQuestions[currentQuestionIndex].answers[i], 
             // Compare the answer to userGuess, then display the correct answer to the correct html element
             // Add the score when each answer is put in.
-            for (let i = 0; i < tempAnswers.length; i++) {
-                if ((userGuess.val().trim()) === tempAnswers[i].label) {
-                    console.log("You guess right");
-                    console.log("Hi :", tempAnswers[i].score);
-                    scoreArray[currentQuestionIndex] += tempAnswers[i].score;
-                    console.log("Score current Round: ", scoreArray[currentQuestionIndex]);
 
-                    // Display the score beside the answer
-                    // Display the correct Answer
-                    console.log('Correct Answer', tempAnswers[i].label);
-                    console.log(i);
-                    $('.answer' + (i + 1)).text(tempAnswers[i].label);
-                    $('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
-                    tempAnswers[i].score = 0;
+            // If user filled in an answer
+            // can also use toUpperCase() to change the input to upper case, and also change DB format to Upper
+
+            // if user input doesn't match any of the answer, say wrong answer
+
+
+            //let guessCorrect = false;
+            if (userGuess.val().trim() !== '') {
+                let guessCorrect = false;
+                let tempAnswers = [...currentQuestion.answers]
+                console.log("tempAnswers: ", tempAnswers);
+                // loop through each answer and check if any answer matches user input
+                for (let i = 0; i < tempAnswers.length; i++) {
+                    if ((userGuess.val().trim().toUpperCase()) === tempAnswers[i].label) {
+                        console.log("You guess right");
+                        console.log("Hi :", tempAnswers[i].score);
+                        scoreArray[currentQuestionIndex] += tempAnswers[i].score;
+                        console.log("Score current Round: ", scoreArray[currentQuestionIndex]);
+
+                        guessCorrect = true;
+                        // Display the score beside the answer
+                        // Display the correct Answer
+                        console.log('Correct Answer', tempAnswers[i].label);
+                        console.log(i);
+                        $('.answer' + (i + 1)).text(tempAnswers[i].label);
+                        $('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
+                        tempAnswers[i].score = 0;
+                        //guessCorrect = false;
+                    }
+
                 }
+                // !!! This function doesn't quite work !!!
+                // IN THE SECOND ROUND, IT ALERT EVEN WHEN THE CORRECT ANSWER IS PUT IN.
+                // IT ALERTED TWICE TOO.
+                // IN THE THIRED ROUND, IT ALERT WRONG WHEN THE CORRECT ANSWER IS PUT IN, IT ALERTED THREE TIMES.
+                if (guessCorrect === false) {
+                    alert("Wrong answer!");
+                    console.log("Wrong answer");
+                }
+
+                // Write scoreRound_1 to HTML
+                console.log("Current Question Number: ", currentQuestionIndex + 1);
+                $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
+
+                // !!!Also needs to write into API!!!!
             }
-            // Write scoreRound_1 to HTML
-            console.log("Current Question Number: ", currentQuestionIndex + 1);
-            $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
-
-            // !!!Also needs to write into API!!!!
-
+            // If user guess all answers correct, hit timeup()
+            else {
+                alert("Please insert an answer!");
+            }
         })
-        timeUp();
+        // timeUp();
     }
 
-    displayQA();
+    if (currentQuestionIndex === 0) {
+        displayQA();
+    }
 
     function timeUp() {
+        console.log("inside timeup");
         clearInterval(timer);
         $('#boardTimer').text(timeCount);
 
@@ -232,6 +273,11 @@ $(document).ready(function () {
         timeCount = 30;
         $('#boardTimer').text(timeCount);
         currentQuestionIndex++;
+        // Not sure if it should be here.
+        let tempAnswers = [...currentQuestion.answers]
+
+        console.log("question Number+1:", currentQuestionIndex);
+        guessCorrect = false;
         displayQA();
     }
 })
