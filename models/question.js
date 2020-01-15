@@ -17,7 +17,7 @@ let Question = sequelize.define("question", {
     type: Sequelize.STRING,
     field: 'quest'
   },
-  answer1: {
+  answer_1: {
     type: Sequelize.STRING,
     field: 'answer_1'
   },
@@ -25,7 +25,7 @@ let Question = sequelize.define("question", {
     type: Sequelize.INTEGER,
     field: 'answer_score_1'
   },
-  answer2: {
+  answer_2: {
     type: Sequelize.STRING,
     field: 'answer_2'
   },
@@ -33,7 +33,7 @@ let Question = sequelize.define("question", {
     type: Sequelize.INTEGER,
     field: 'answer_score_2'
   },
-  answer3: {
+  answer_3: {
     type: Sequelize.STRING,
     field: 'answer_3'
   },
@@ -41,7 +41,7 @@ let Question = sequelize.define("question", {
     type: Sequelize.INTEGER,
     field: 'answer_score_3'
   },
-  answer4: {
+  answer_4: {
     type: Sequelize.STRING,
     field: 'answer_4'
   },
@@ -49,7 +49,7 @@ let Question = sequelize.define("question", {
     type: Sequelize.INTEGER,
     field: 'answer_score_4'
   },
-  answer5: {
+  answer_5: {
     type: Sequelize.STRING,
     field: 'answer_5'
   },
@@ -57,7 +57,7 @@ let Question = sequelize.define("question", {
     type: Sequelize.INTEGER,
     field: 'answer_score_5'
   },
-  answer6: {
+  answer_6: {
     type: Sequelize.STRING,
     field: 'answer_6'
   },
