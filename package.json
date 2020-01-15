@@ -10,6 +10,7 @@
     "inquirer": "^7.0.3",
     "method-override": "^3.0.0",
     "mysql": "^2.17.1",
+    "mysql2": "^2.1.0",
     "sequelize": "^5.21.3"
   },
   "devDependencies": {},
@@ -26,5 +27,6 @@
   "bugs": {
     "url": "https://github.com/zhaoyu-qiao/Family-Feud/issues"
   },
-  "homepage": "https://github.com/zhaoyu-qiao/Family-Feud#readme"
+  "homepage": "https://github.com/zhaoyu-qiao/Family-Feud#readme",
+  "keywords": []
 }

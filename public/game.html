@@ -9,7 +9,7 @@
 
     <!-- Latest compiled and minified CSS & JS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/game.css" media="screen" title="no title">
+    <!--<link rel="stylesheet" href="./public/css/game.css" media="screen" title="no title">-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -51,8 +51,8 @@
                                     <span class='DBG'>1</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="qAnswrOne">coal</span>
-                                    <b class='LBG'>20</b>
+                                    <span class="answer1">coal</span>
+                                    <b class='LBG' class='answer_score_1'>20</b>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     <span class='DBG'>4</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="qAnswrFour">gift</span>
+                                    <span class="answer4">gift</span>
                                     <b class='LBG'>10</b>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                     <span class='DBG'>2</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="qAnswrTwo">candy</span>
+                                    <span class="answer2">candy</span>
                                     <b class='LBG'>10</b>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                     <span class='DBG'>5</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="qAnswrFive">socks</span>
+                                    <span class="answer5">socks</span>
                                     <b class='LBG'>10</b>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                     <span class='DBG'>3</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="qAnswrThree">money</span>
+                                    <span class="answer3">money</span>
                                     <b class='LBG'>20</b>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                     <span class='DBG'>6</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="qAnswrSix">lottery ticket</span>
+                                    <span class="answer6">lottery ticket</span>
                                     <b class='LBG'>20</b>
                                 </div>
                             </div>
@@ -149,10 +149,10 @@
 
                 <form class="form-inline" class="form-group">
                     <label id='awardTeam1' class='button' for="playerAnswer-input">Your Guess!</label>
-                    <input type="text" id='newQuestion' id="playerAnswer-input">
+                    <input type="text" id="playerAnswer-input" onkeydown="buttonAction()">
 
-                    <input class='button' id="add-playerAnswer" id='awardTeam2' type="submit" value="Submit"
-                        class="add-playerAnswer">
+                    <input class='button' id="add-playerAnswer" type="submit" value="Submit" class="add-playerAnswer"
+                        disabled>
                     <!-- <button class='button' id="add-playerAnswer" id='awardTeam2' type="submit" value="Submit"
             class="add-playerAnswer">Submit</button> -->
                 </form>
@@ -180,7 +180,7 @@
                     <div class='colHolder'>
 
                         <div class="roundOne">
-                            <h4 class="roundOneScore"><img src="./images/scoreRound1.jpg" height="40px"
+                            <h4 class="scoreRound_1"><img src="./images/scoreRound1.jpg" height="40px"
                                     alt="Responsive image"> :30
                             </h4>
                         </div>
@@ -188,7 +188,7 @@
                         <hr class="scoreHrColor">
 
                         <div class="roundTwo">
-                            <h4 class="roundTwoScore"><img src="./images/scoreRound2.jpg" height="40px"
+                            <h4 class="scoreRound_2"><img src="./images/scoreRound2.jpg" height="40px"
                                     alt="Responsive image"> :40
                             </h4>
                         </div>
@@ -196,7 +196,7 @@
                         <hr class="scoreHrColor">
 
                         <div class="roundThree">
-                            <h4 class="roundThreeScore"><img src="./images/scoreRound3.jpg" height="40px"
+                            <h4 class="scoreRound_3"><img src="./images/scoreRound3.jpg" height="40px"
                                     alt="Responsive image"> :50
                             </h4>
                         </div>
@@ -255,7 +255,7 @@
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript">
     </script>
-    <script src="./game.js" type="text/javascript"></script>
+    <script src="./javascript/game.js" type="text/javascript"></script>
     <!--<script src="js/game.js" type="text/javascript"></script>-->
 
 </body>
