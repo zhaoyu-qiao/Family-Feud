@@ -149,9 +149,10 @@
 
                 <form class="form-inline" class="form-group">
                     <label id='awardTeam1' class='button' for="playerAnswer-input">Your Guess!</label>
-                    <input type="text" id="playerAnswer-input">
+                    <input type="text" id="playerAnswer-input" onkeydown="buttonAction()">
 
-                    <input class='button' id="add-playerAnswer" type="submit" value="Submit" class="add-playerAnswer">
+                    <input class='button' id="add-playerAnswer" type="submit" value="Submit" class="add-playerAnswer"
+                        disabled>
                     <!-- <button class='button' id="add-playerAnswer" id='awardTeam2' type="submit" value="Submit"
             class="add-playerAnswer">Submit</button> -->
                 </form>
