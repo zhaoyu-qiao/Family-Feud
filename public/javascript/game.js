@@ -1,7 +1,11 @@
 // !!!Get data from DB
 // !!!Do I pull them directly from DB or from API
+
 // let Questions= require('./models/question.js')
 $(document).ready(function () {
+    $.get("/api/highscores", function (data) {
+        console.log("HISCORES", data)
+    })
 
     // Default round scores:
     $(".scoreRound_1").text('0');
@@ -26,10 +30,10 @@ $(document).ready(function () {
     function helper(dbResponse) {
         const questionFormatted = [];
         dbResponse.forEach(function (res, index) {
-            const question = Object.keys(res).filter((f) => f.includes('question'));
+            const question = Object.keys(res).filter((f) => f.includes('quest'));
             const answerIds = Array.from(new Set(
                 Object.keys(res)
-                .filter((f) => !f.includes('question') && !f.includes('id'))
+                .filter((f) => !f.includes('quest') && !f.includes('id'))
                 .map((m) => m.substring(m.length, m.length - 1))))
             const obj = {
                 question: res[question[0]],
@@ -93,7 +97,17 @@ $(document).ready(function () {
 
     // Convert the db format into new format using helper function
     console.log(helper(questions))
-    const newQuestions = helper(questions);
+    let newQuestions = helper(questions);
+    $.get("api/questions", function (data) {
+        console.log("API CALL", data);
+        newQuestions = helper(data)
+
+        // after calling data back from the API, display data
+        if (currentQuestionIndex === 0) {
+            displayQA();
+        }
+    })
+
 
     // global variables
     let question = $('#question');
@@ -150,8 +164,8 @@ $(document).ready(function () {
         timer = setInterval(countDown, 1000);
 
         // Display question and hidden answers
-        question.text(questions[currentQuestionIndex].question);
-        console.log("current question: ", questions[currentQuestionIndex]);
+        question.text(newQuestions[currentQuestionIndex].question);
+        console.log("current question: ", newQuestions[currentQuestionIndex]);
         answer1.html('<button>&nbsp&nbsp&nbsp1&nbsp&nbsp&nbsp</button>');
         answer2.html('<button>&nbsp&nbsp&nbsp2&nbsp&nbsp&nbsp</button>');
         answer3.html('<button>&nbsp&nbsp&nbsp3&nbsp&nbsp&nbsp</button>');
@@ -174,85 +188,85 @@ $(document).ready(function () {
         //     $(".scoreRound_" + (currentQuestionIndex + 1)).text('0');
         // } else {
 
+    }
+    $('#add-playerAnswer').on('click', function (event) {
+        // prevent page refresh
+        event.preventDefault();
+        console.log("submit is triggered");
 
-        $('#add-playerAnswer').on('click', function (event) {
-            // prevent page refresh
-            event.preventDefault();
-            console.log("submit is triggered");
+        // buttonClick = true;
+        // let currentQuestion = newQuestions[currentQuestionIndex];
 
-            // buttonClick = true;
-            // let currentQuestion = newQuestions[currentQuestionIndex];
+        // Deep clone answers array then change the score of the guessed answer to 0
+        // Cited https://dev.to/samanthaming/how-to-deep-clone-an-array-in-javascript-3cig
 
-            // Deep clone answers array then change the score of the guessed answer to 0
-            // Cited https://dev.to/samanthaming/how-to-deep-clone-an-array-in-javascript-3cig
-
-            // !!! This should be changed
-            // let tempAnswers = [...currentQuestion.answers]
-            // console.log("Temporary Answers", tempAnswers);
-
-
-
-
-            // If user filled in an answer
-            // let guessCorrect = false;
-            if (userGuess.val().trim() !== '') {
-
-                let guessCorrect = false;
-                let tempAnswers = [...currentQuestion.answers]
-                console.log("tempAnswers: ", tempAnswers);
-
-                // If the answers does not include the user's answer, say wrong
-                // Array.forEach
+        // !!! This should be changed
+        // let tempAnswers = [...currentQuestion.answers]
+        // console.log("Temporary Answers", tempAnswers);
 
 
 
-                // Loop through the answers in newQuestions[currentQuestionIndex].answers[i], 
-                // Compare the answer to userGuess, then display the correct answer to the correct html element
-                // Add the score when each answer is put in.
-                for (let i = 0; i < tempAnswers.length; i++) {
-                    if ((userGuess.val().trim().toUpperCase()) === tempAnswers[i].label) {
-                        console.log("You guess right");
-                        console.log("Hi :", tempAnswers[i].score);
-                        scoreArray[currentQuestionIndex] += tempAnswers[i].score;
-                        console.log("Score current Round: ", scoreArray[currentQuestionIndex]);
 
-                        guessCorrect = true;
-                        // Display the score beside the answer
-                        // Display the correct Answer
-                        console.log('Correct Answer', tempAnswers[i].label);
-                        console.log(i);
-                        $('.answer' + (i + 1)).text(tempAnswers[i].label);
-                        $('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
-                        tempAnswers[i].score = 0;
-                        //guessCorrect = false;
-                    }
+        // If user filled in an answer
+        // let guessCorrect = false;
+        if (userGuess.val().trim() !== '') {
 
-                }
-                // !!! This function doesn't quite work, It triggers multiple times
-                // if user input doesn't match any of the answer, say wrong answer
+            let guessCorrect = false;
+            let tempAnswers = [...currentQuestion.answers]
+            console.log("tempAnswers: ", tempAnswers);
 
-                if (guessCorrect === false) {
-                    alert("Wrong answer!");
-                    console.log("Wrong answer");
+            // If the answers does not include the user's answer, say wrong
+            // Array.forEach
+
+
+
+            // Loop through the answers in newQuestions[currentQuestionIndex].answers[i], 
+            // Compare the answer to userGuess, then display the correct answer to the correct html element
+            // Add the score when each answer is put in.
+            for (let i = 0; i < tempAnswers.length; i++) {
+                if ((userGuess.val().trim().toUpperCase()) === tempAnswers[i].label) {
+                    console.log("You guess right");
+                    console.log("Hi :", tempAnswers[i].score);
+                    scoreArray[currentQuestionIndex] += tempAnswers[i].score;
+                    console.log("Score current Round: ", scoreArray[currentQuestionIndex]);
+
+                    guessCorrect = true;
+                    // Display the score beside the answer
+                    // Display the correct Answer
+                    console.log('Correct Answer', tempAnswers[i].label);
+                    console.log(i);
+                    $('.answer' + (i + 1)).text(tempAnswers[i].label);
+                    $('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
+                    tempAnswers[i].score = 0;
+                    //guessCorrect = false;
                 }
 
-                // Write scoreRound_n to HTML
-                console.log("Current Question Number: ", currentQuestionIndex + 1);
-                $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
-
-                // !!!Also needs to write into API with userName and userScore!
             }
-            // If user guess all answers correct, hit timeup()
-            else {
-                alert("Please insert an answer!");
+            // !!! This function doesn't quite work, It triggers multiple times
+            // if user input doesn't match any of the answer, say wrong answer
+
+            if (guessCorrect === false) {
+                alert("Wrong answer!");
+                console.log("Wrong answer");
             }
-        })
 
-    }
+            // Write scoreRound_n to HTML
+            console.log("Current Question Number: ", currentQuestionIndex + 1);
+            $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
 
-    if (currentQuestionIndex === 0) {
-        displayQA();
-    }
+            // !!!Also needs to write into API with userName and userScore!
+        }
+        // If user guess all answers correct, hit timeup()
+        else {
+            alert("Please insert an answer!");
+        }
+    })
+
+
+
+    // if (currentQuestionIndex === 0) {
+    //     displayQA();
+    // }
 
 
     // Need to add a bunch of if else to handle round score, result page, wrong answers here.
@@ -326,7 +340,7 @@ $(document).ready(function () {
 function buttonAction() {
     //console.log("button action loaded");
     document.getElementById("add-playerAnswer").disabled = false;
-    if ($('#playerAnswer-input').val().trim() === '') {
+    if ($('#playerAnswer-input').val().trim() === '') { //TODO reconsider comparison
         document.getElementById("add-playerAnswer").disabled = true;
     } else {
         document.getElementById("add-playerAnswer").disabled = false;

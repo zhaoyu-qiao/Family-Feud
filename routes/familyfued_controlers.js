@@ -5,7 +5,7 @@ module.exports = function (app) {
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Question
     db.Question.findAll({
-      include: [db.Question] //not sure if answers should be in their on DB 
+      include: [db.Question] //not sure if answers should be in their on DB //TODO reconsider what this is doing
     }).then(function (dbQuestion) {
       res.json(dbQuestion);
     });
@@ -44,4 +44,13 @@ module.exports = function (app) {
       res.json(dbQuestion);
     });
   });
+  app.get("/api/highscores", function (req, res) {
+    console.log("we hit the highscores")
+    db.User_score.findAll().then(data => res.json({
+      dbstuff: data
+    }))
+  })
+  app.post("/api/highscores", function (req, res) {
+    console.log(req.body)
+  })
 };

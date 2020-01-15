@@ -27,7 +27,7 @@ let UserScore = sequelize.define("user_score", {
   tableName: 'user_scores',
   timestamps: false
 });
-// UserScore.belongsTo(User, {
+// UserScore.belongsTo(User, { //TODO fix association with User table
 //   foreignKey: 'userId'
 // });
 // Syncs with DB
