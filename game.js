@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    // Default round scores:
+    $(".scoreRound_1").text('0');
+    $(".scoreRound_2").text('0');
+    $(".scoreRound_3").text('0');
     // Below is the Formatted Data Structure, 
     // Converting the Questions from database to an array of objects, 
     // With each object as the following format
@@ -13,7 +17,7 @@ $(document).ready(function () {
     //         value: 20
     //     }]
     // }
-
+    console.log('file loaded')
 
     // Function to transfer data from database to local format to be used.
     function helper(dbResponse) {
@@ -22,7 +26,7 @@ $(document).ready(function () {
             const question = Object.keys(res).filter((f) => f.includes('question'));
             const answerIds = Array.from(new Set(
                 Object.keys(res)
-                .filter((f) => !f.includes('question'))
+                .filter((f) => !f.includes('question') && !f.includes('id'))
                 .map((m) => m.substring(m.length, m.length - 1))))
             const obj = {
                 question: res[question[0]],
@@ -45,7 +49,9 @@ $(document).ready(function () {
         return questionFormatted;
     }
 
+    // !!! This needs to be modified to use data from the DB!!!
     let questions = [{
+            id: 1,
             question: "Who was the first Disney princess?",
             answer_1: "Snow White",
             answer_score_1: 20,
@@ -54,9 +60,10 @@ $(document).ready(function () {
             answer_3: "Cinderella",
             answer_score_3: 20,
             answer_4: "Belle",
-            answewr_score_4: 10
+            answer_score_4: 10
         },
         {
+            id: 2,
             question: "Who was the second Disney princess?",
             answer_1: "Snow-White",
             answer_score_1: 20,
@@ -68,6 +75,7 @@ $(document).ready(function () {
             answer_score_4: 10
         },
         {
+            id: 3,
             question: "Who was the Third Disney princess?",
             answer_1: "Snow White",
             answer_score_1: 20,
@@ -99,7 +107,7 @@ $(document).ready(function () {
     let userGuess = $('#playerAnswer-input');
 
     // Timer variables
-    let timeCount = 30;
+    let timeCount = 10;
     let timer;
 
     // Guess status
@@ -111,6 +119,8 @@ $(document).ready(function () {
 
     // Define score Array for three rounds.
     let scoreArray = [0, 0, 0];
+    // Define total score 
+    let totalScore = 0;
 
 
     // Count down function
@@ -125,15 +135,7 @@ $(document).ready(function () {
         }
     };
 
-    // Timer function
-    // function timer() {
-    //     timeCount = 30;
-    //     timer = setInterval(countDown, 1000);
-    //     if (timeCount === 0) {
-    //         alert("You've run out of time!")
-    //         clear(timer);
-    //     }
-    // }
+    // function clicked to see if the button is clicked or not within timeout.
 
 
 
@@ -154,26 +156,28 @@ $(document).ready(function () {
         answer5.html('<button>&nbsp&nbsp&nbsp5&nbsp&nbsp&nbsp</button>');
         answer6.html('<button>&nbsp&nbsp&nbsp6&nbsp&nbsp&nbsp</button>');
 
-        // Display the guessed anwser if a user guess the correct answer
-        // Use Object.values()
-        // questions[currentQuestionIndex].values
-        // if the answers array includes the user Guess. 
-        // Make sure the () are correct
-        // This should be on submit form 
-        // Make sure on submit won't refresh the page too.
+        // Button click status
+        // let buttonClick = false;
 
-        // console.log('answers Array:', Object.values(questions[currentQuestionIndex]));
+
 
 
         currentQuestion = newQuestions[currentQuestionIndex];
         console.log("current QQ: ", currentQuestion);
+
+
+        // !!! Add functions here - if user didn't input anything to the form, show score 0
+        // if (buttonClick === false) {
+        //     $(".scoreRound_" + (currentQuestionIndex + 1)).text('0');
+        // } else {
+
 
         $('#add-playerAnswer').on('click', function (event) {
             // prevent page refresh
             event.preventDefault();
             console.log("submit is triggered");
 
-
+            // buttonClick = true;
             // let currentQuestion = newQuestions[currentQuestionIndex];
 
             // Deep clone answers array then change the score of the guessed answer to 0
@@ -184,22 +188,18 @@ $(document).ready(function () {
             // console.log("Temporary Answers", tempAnswers);
 
 
-            // Loop through the answers in newQuestions[currentQuestionIndex].answers[i], 
-            // Compare the answer to userGuess, then display the correct answer to the correct html element
-            // Add the score when each answer is put in.
+
 
             // If user filled in an answer
-            // can also use toUpperCase() to change the input to upper case, and also change DB format to Upper
-
-            // if user input doesn't match any of the answer, say wrong answer
-
-
             //let guessCorrect = false;
             if (userGuess.val().trim() !== '') {
                 let guessCorrect = false;
                 let tempAnswers = [...currentQuestion.answers]
                 console.log("tempAnswers: ", tempAnswers);
-                // loop through each answer and check if any answer matches user input
+
+                // Loop through the answers in newQuestions[currentQuestionIndex].answers[i], 
+                // Compare the answer to userGuess, then display the correct answer to the correct html element
+                // Add the score when each answer is put in.
                 for (let i = 0; i < tempAnswers.length; i++) {
                     if ((userGuess.val().trim().toUpperCase()) === tempAnswers[i].label) {
                         console.log("You guess right");
@@ -219,16 +219,15 @@ $(document).ready(function () {
                     }
 
                 }
-                // !!! This function doesn't quite work !!!
-                // IN THE SECOND ROUND, IT ALERT EVEN WHEN THE CORRECT ANSWER IS PUT IN.
-                // IT ALERTED TWICE TOO.
-                // IN THE THIRED ROUND, IT ALERT WRONG WHEN THE CORRECT ANSWER IS PUT IN, IT ALERTED THREE TIMES.
+                // !!! This function doesn't quite work !!! It triggers multiple times
+                // if user input doesn't match any of the answer, say wrong answer
+
                 if (guessCorrect === false) {
                     alert("Wrong answer!");
                     console.log("Wrong answer");
                 }
 
-                // Write scoreRound_1 to HTML
+                // Write scoreRound_n to HTML
                 console.log("Current Question Number: ", currentQuestionIndex + 1);
                 $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
 
@@ -239,6 +238,7 @@ $(document).ready(function () {
                 alert("Please insert an answer!");
             }
         })
+        // }
         // timeUp();
     }
 
@@ -246,31 +246,41 @@ $(document).ready(function () {
         displayQA();
     }
 
+
+    // Need to add a bunch of if else to handle round score, result page, wrong answers here.
     function timeUp() {
         console.log("inside timeup");
         clearInterval(timer);
         $('#boardTimer').text(timeCount);
 
-        // Next Question or Display Results for a certain time
-        if (currentQuestionIndex === (newQuestions.length - 1)) {
-            // show whole result page
-            console.log("Here's your total score!")
-
-            // write into html the total score 
-            // write into API too?
+        // if the button is not clicked, user's roundScore is 0
+        if (document.getElementById('add-playerAnswer').clicked == false) {
+            scoreArray[currentQuestionIndex] += 0;
+            console.log("roundScore", scoreArray[currentQuestionIndex]);
+            $(".scoreRound_" + (currentQuestionIndex + 1)).text('0');
         } else {
-            // !!!show all answers and current score for a certain time!!!
+            // Next Question or Display Results for a certain time
+            if (currentQuestionIndex === (newQuestions.length - 1)) {
+                // if user didn't click the button, roundScore+0;
 
-            // function roundResult
+                // show whole result page 
+                displayResults();
+                console.log("Here's your total score!")
 
-            // display next qusetion
-            displayNextQA();
+            } else {
+                // !!!show all answers and current score for a certain time!!!
+
+                // function roundResult? If in same page then this is not needed.
+
+                // display next qusetion
+                displayNextQA();
+
+            }
         }
-
     }
 
     function displayNextQA() {
-        timeCount = 30;
+        timeCount = 10;
         $('#boardTimer').text(timeCount);
         currentQuestionIndex++;
         // Not sure if it should be here.
@@ -280,4 +290,31 @@ $(document).ready(function () {
         guessCorrect = false;
         displayQA();
     }
+
+    function displayResults() {
+        // get total score
+        scoreArray.forEach(function (roundScore) {
+            totalScore += parseInt(roundScore);
+            return totalScore;
+        })
+
+        console.log('totalScore: ', totalScore);
+
+        // Use setTimeout()?
+        // Display totalScore to html
+        $('.totalScore').text(parseInt(totalScore));
+
+        // !!! Also need to update the DB/ API 
+    }
 })
+
+// Button disable or Enable
+function buttonAction() {
+    console.log("button action loaded");
+    document.getElementById("add-playerAnswer").disabled = false;
+    if ($('#playerAnswer-input').val().trim() === '') {
+        document.getElementById("add-playerAnswer").disabled = true;
+    } else {
+        document.getElementById("add-playerAnswer").disabled = false;
+    }
+}
