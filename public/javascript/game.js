@@ -1,4 +1,5 @@
 // !!!Get data from DB
+// !!!Do I pull them directly from DB or from API
 // let Questions= require('./models/question.js')
 $(document).ready(function () {
 
