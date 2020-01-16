@@ -96,10 +96,15 @@ $(document).ready(function () {
     ]
 
     // Convert the db format into new format using helper function
+    // These were the dummy questions for testing on this js file.
     console.log(helper(questions))
     let newQuestions = helper(questions);
+    // Get the 3 randomquestions data from the questions table.
+
+    // !!! Instead of using api/questions, use api/randomquestions
     $.get("api/questions", function (data) {
-        console.log("API CALL", data);
+        console.log("All questions", data);
+
         newQuestions = helper(data)
 
         // after calling data back from the API, display data
@@ -189,6 +194,7 @@ $(document).ready(function () {
         // } else {
 
     }
+
     $('#add-playerAnswer').on('click', function (event) {
         // prevent page refresh
         event.preventDefault();
@@ -234,11 +240,15 @@ $(document).ready(function () {
                     // Display the score beside the answer
                     // Display the correct Answer
                     console.log('Correct Answer', tempAnswers[i].label);
-                    console.log(i);
+                    //console.log(i);
+
+                    //$('.front').hide();
+                    //$('.back').show();
                     $('.answer' + (i + 1)).text(tempAnswers[i].label);
-                    $('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
+                    //$('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
                     tempAnswers[i].score = 0;
                     //guessCorrect = false;
+                    return tempAnswers;
                 }
 
             }
@@ -251,8 +261,8 @@ $(document).ready(function () {
             }
 
             // Write scoreRound_n to HTML
-            console.log("Current Question Number: ", currentQuestionIndex + 1);
-            $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
+            // console.log("Current Question Number: ", currentQuestionIndex + 1);
+            // $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
 
             // !!!Also needs to write into API with userName and userScore!
         }
@@ -268,11 +278,30 @@ $(document).ready(function () {
     //     displayQA();
     // }
 
+    // clear timer 
+    function clearTimer() {
+        clearInterval(timer);
+    }
 
     // Need to add a bunch of if else to handle round score, result page, wrong answers here.
     function timeUp() {
         console.log("timeup is called")
         console.log("inside timeup");
+
+
+        // Added on 16
+
+        displayRoundAnswers();
+        //displayRoundScore();
+        displayResults();
+
+        // call logicInTimeout after 5 seconds;
+        setTimeout(logicInTimeout, 5000);
+    }
+
+    function logicInTimeout() {
+
+        //setTimeout(clearTimer(), 5000);
         clearInterval(timer);
         $('#boardTimer').text(timeCount);
 
@@ -317,10 +346,27 @@ $(document).ready(function () {
         displayQA();
     }
 
+    // display round answers
+    // added on 16
+    function displayRoundAnswers() {
+        console.log("Display Round Answers");
+        clearTimer();
+        for (let j = 0; j < (newQuestions[currentQuestionIndex].answers.length); j++)
+            $('.answer' + (j + 1)).text(newQuestions[currentQuestionIndex].answers[j].label);
+    }
+
+
+    // display all scores
     function displayResults() {
 
-        console.log('displayResults is called')
+        //console.log('displayResults is called')
+
+        // Write scoreRound_n to HTML
+        //console.log("Current Question Number: ", currentQuestionIndex + 1);
+        $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
+
         // get total score
+        console.log('SCORE ARRAY:', scoreArray)
         scoreArray.forEach(function (roundScore) {
             totalScore += parseInt(roundScore);
             return totalScore;
@@ -334,6 +380,8 @@ $(document).ready(function () {
 
         // !!! Also need to update the DB/ API 
     }
+
+
 })
 
 // Button disable or Enable
@@ -346,3 +394,17 @@ function buttonAction() {
         document.getElementById("add-playerAnswer").disabled = false;
     }
 }
+
+
+// test answer flip
+// toggles is-flipped class to display the back of cards
+let displayCard = function () {
+    this.classList.toggle('is-flipped');
+}
+// cards array holds all cards
+let card = document.getElementsByClassName("card");
+let cards = [...card];
+// for loop to add event listeners to each card
+for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener("click", displayCard);
+};

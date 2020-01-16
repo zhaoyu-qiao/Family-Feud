@@ -1,4 +1,5 @@
 // !!!Get data from DB
+// !!!Do I pull them directly from DB or from API
 // let Questions= require('./models/question.js')
 $(document).ready(function () {
 
@@ -220,8 +221,10 @@ $(document).ready(function () {
                         // Display the correct Answer
                         console.log('Correct Answer', tempAnswers[i].label);
                         console.log(i);
+                        $('.front').hide();
+                        $('.back').show();
                         $('.answer' + (i + 1)).text(tempAnswers[i].label);
-                        $('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
+                        //$('.answer_score_' + (i + 1)).text(tempAnswers[i].score);
                         tempAnswers[i].score = 0;
                         //guessCorrect = false;
                     }
@@ -237,7 +240,8 @@ $(document).ready(function () {
 
                 // Write scoreRound_n to HTML
                 console.log("Current Question Number: ", currentQuestionIndex + 1);
-                $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
+                $(".scoreRound_" + (currentQuestionIndex + 1)).html("Round"
+                    scoreArray[currentQuestionIndex]);
 
                 // !!!Also needs to write into API with userName and userScore!
             }

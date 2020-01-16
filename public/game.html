@@ -9,7 +9,7 @@
 
     <!-- Latest compiled and minified CSS & JS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="./public/css/game.css" media="screen" title="no title">-->
+    <!--<link rel="stylesheet" href="./css/game.css" media="screen" title="no title">-->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class='card__face back DBG'>
                                     <span class="answer1">coal</span>
-                                    <b class='LBG' class='answer_score_1'>20</b>
+                                    <b class='LBG' class='answer_score_1'></b>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +65,8 @@
                                     <span class='DBG'>4</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer4">gift</span>
-                                    <b class='LBG'>10</b>
+                                    <span class="answer4"></span>
+                                    <b class='LBG'></b>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class='card__face back DBG'>
                                     <span class="answer2">candy</span>
-                                    <b class='LBG'>10</b>
+                                    <b class='LBG'></b>
                                 </div>
                             </div>
                         </div>
@@ -93,8 +93,8 @@
                                     <span class='DBG'>5</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer5">socks</span>
-                                    <b class='LBG'>10</b>
+                                    <span class="answer5"></span>
+                                    <b class='LBG'></b>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +107,8 @@
                                     <span class='DBG'>3</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer3">money</span>
-                                    <b class='LBG'>20</b>
+                                    <span class="answer3"></span>
+                                    <b class='LBG'></b>
                                 </div>
                             </div>
                         </div>
@@ -122,8 +122,8 @@
                                     <span class='DBG'>6</span>
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer6">lottery ticket</span>
-                                    <b class='LBG'>20</b>
+                                    <span class="answer6"></span>
+                                    <b class='LBG'></b>
                                 </div>
                             </div>
 
@@ -148,7 +148,7 @@
               <div id='awardTeam2' data-team='2' class='button'>Award Team 2</div> -->
 
                 <form class="form-inline" class="form-group">
-                    <label id='awardTeam1' class='button' for="playerAnswer-input">Your Guess!</label>
+                    <label id='awardTeam1' class='button' for="playerAnswer-input">Your Guess! </label>
                     <input type="text" id="playerAnswer-input" onkeydown="buttonAction()">
 
                     <input class='button' id="add-playerAnswer" type="submit" value="Submit" class="add-playerAnswer"
@@ -169,7 +169,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class='questionHolder'>
-                        <span class='question'>Check Out Your Scores!</span>
+                        <span class='question member-name'>Check Out Your Scores!</span>
                     </div>
                 </div>
             </div>
@@ -180,32 +180,37 @@
                     <div class='colHolder'>
 
                         <div class="roundOne">
+                            <h4>First Round: </h4>
                             <h4 class="scoreRound_1"><img src="./images/scoreRound1.jpg" height="40px"
-                                    alt="Responsive image"> :30
+                                    alt="Responsive image">
                             </h4>
                         </div>
 
                         <hr class="scoreHrColor">
 
                         <div class="roundTwo">
+                            <h4>Second Round: </h4>
+
                             <h4 class="scoreRound_2"><img src="./images/scoreRound2.jpg" height="40px"
-                                    alt="Responsive image"> :40
+                                    alt="Responsive image"> Second Round:
                             </h4>
                         </div>
 
                         <hr class="scoreHrColor">
 
                         <div class="roundThree">
+                            <h4>Third Round: </h4>
                             <h4 class="scoreRound_3"><img src="./images/scoreRound3.jpg" height="40px"
-                                    alt="Responsive image"> :50
+                                    alt="Responsive image"> Third Round:
                             </h4>
                         </div>
 
                         <hr class="scoreHrColor">
 
                         <div class="finalTotalScore">
+                            <h4>Total Score: </h4>
                             <h4 class="totalScore"><img src="./images/scoreTotal.jpg" height="25px"
-                                    alt="Responsive image"> :120
+                                    alt="Responsive image">Total Score:
                             </h4>
                         </div>
                         <hr class="scoreHrColor">
