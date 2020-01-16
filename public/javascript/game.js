@@ -292,8 +292,8 @@ $(document).ready(function () {
         // Added on 16
 
         displayRoundAnswers();
-        //displayRoundScore();
-        displayResults();
+        displayRoundScore();
+        //displayResults();
 
         // call logicInTimeout after 5 seconds;
         setTimeout(logicInTimeout, 5000);
@@ -356,20 +356,25 @@ $(document).ready(function () {
     }
 
 
+    function displayRoundScore() {
+        // Write scoreRound_n to HTML
+        //console.log("Current Question Number: ", currentQuestionIndex + 1);
+        $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
+    }
     // display all scores
     function displayResults() {
 
         //console.log('displayResults is called')
 
-        // Write scoreRound_n to HTML
-        //console.log("Current Question Number: ", currentQuestionIndex + 1);
-        $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
+        // // Write scoreRound_n to HTML
+        // //console.log("Current Question Number: ", currentQuestionIndex + 1);
+        // $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
 
         // get total score
-        console.log('SCORE ARRAY:', scoreArray)
+        console.log('SCORE ARRAY:', scoreArray);
         scoreArray.forEach(function (roundScore) {
             totalScore += parseInt(roundScore);
-            return totalScore;
+            //return totalScore;
         })
 
         console.log('totalScore: ', totalScore);
