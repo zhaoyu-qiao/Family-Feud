@@ -48,3 +48,6 @@ app.get("/api/users", function (req, res) {
 });
 
 require("./routes/html_routes")(app);
+
+// !!! That route file doesn't work yet
+// require("./routes/randomquestion")(app);
