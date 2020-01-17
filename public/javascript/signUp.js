@@ -141,6 +141,7 @@ $(document).ready(function () {
     // Does a post to the signup route. If succesful, we are redirected to the game page
     // Otherwise we log any errors
     function signUpUser(username, email, password) {
+        console.log("we fired off a post to /api/signUp")
         $.post("/api/signUp", {
             username: username,
             email: email,

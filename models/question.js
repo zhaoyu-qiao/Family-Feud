@@ -1,12 +1,13 @@
 // Sequelize (capital) references the standard library
 let Sequelize = require("sequelize");
-let config = require('../config/config.json');
-// sequelize (lowercase) references my connection to the DB.
-let sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
-  host: config.host,
-  dialect: 'mysql'
-});
+// let config = require('../config/config.json');
+// // sequelize (lowercase) references my connection to the DB.
+// let sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
+//   host: config.host,
+//   dialect: 'mysql'
+// });
 // Creates a "Question" model that matches up with DB
+module.exports = function (sequelize, DataTypes) {
 let Question = sequelize.define("question", {
   id: {
     type: Sequelize.INTEGER,
@@ -69,7 +70,8 @@ let Question = sequelize.define("question", {
   tableName: 'questions',
   timestamps: false
 });
+return Question}
 // Syncs with DB
-Question.sync();
+//Question.sync();
 // Makes the QUestion Model available for other files (will also create a table)
-module.exports = Question;
+//module.exports = Question;
