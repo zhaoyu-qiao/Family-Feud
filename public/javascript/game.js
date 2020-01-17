@@ -388,6 +388,12 @@ $(document).ready(function () {
         // Display totalScore to html
         $('.totalScore').text(parseInt(totalScore));
 
+        // !!!! Need to post user score and user name to the api.
+        // $.post("/api/users").then(function (data) {
+        //     console.log('User Data: ', data);
+        //     userName = data.username;
+        //     $(".member-name").text(userName);
+        // });
         // !!! Also need to update the DB/ API 
     }
 

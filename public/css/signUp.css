@@ -1,7 +1,5 @@
 /* Cited: http://www.css3transition.com/toggle-animation-login-sign-form/
     Animation toggle between sign up and sign in form  */
-
-
 @import "https://fonts.googleapis.com/css?family=Oswald|Roboto";
 
 body {
@@ -12,7 +10,6 @@ body {
     position: absolute;
     top: 0;
     width: 100%;
-
 }
 
 body::before {
@@ -32,12 +29,12 @@ body::before {
 .table-cell h2 {
     margin-top: -30px;
     /* align-content: center;
-    text-indent: 30px; */
+        text-indent: 30px; */
     /* text-align: center;
-    display: inline-block; */
+        display: inline-block; */
     /* background: -webkit-linear-gradient(160deg, #a54e07, #b47e11, #bc881b, #bc881b, #a54e07);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; */
 }
 
 .table {
@@ -50,23 +47,21 @@ body::before {
     display: table-cell;
     transition: all 0.5s ease 0s;
     vertical-align: middle;
-
 }
 
 /* .container {
-    background-color: rgb(153, 158, 222);
-    height: 320px;
-    margin: -160px auto 0;
-    position: relative;
-    top: 50%;
-    transition: all 0.5s ease 0s;
-    width: 600px;
-} */
-
+        background-color: rgb(153, 158, 222);
+        height: 320px;
+        margin: -160px auto 0;
+        position: relative;
+        top: 50%;
+        transition: all 0.5s ease 0s;
+        width: 600px;
+    } */
 .container {
     /* background-color: rgb(153, 158, 222); */
     /* height: 320px; */
-    height: 520px;
+    height: 525px;
     margin: -160px auto 0;
     position: relative;
     /* top: 50%; */
@@ -74,7 +69,7 @@ body::before {
     padding-left: 115px;
     padding-right: 115px;
     transition: all 0.7s ease 0s;
-    width: 600px;
+    width: 605px;
     /* background: #1e5799; */
     background: #7db9e8;
     background: -moz-linear-gradient(top, #7db9e8 0%, #207cca 49%, #2989d8 50%, #1e5799 100%);
@@ -86,9 +81,8 @@ body::before {
 }
 
 #signInSignUp-form {
-    height: 520px;
+    height: 525px;
     margin-top: 30px;
-
 }
 
 .container .box {
@@ -98,32 +92,28 @@ body::before {
     position: absolute;
     top: 0;
     width: 100%;
-
 }
 
 .container .box::before,
 .container .box::after {
     /* background-color: rgb(146, 151, 224); */
     content: " ";
-    height: 285px;
+    height: 290px;
     left: 152px;
     position: absolute;
     top: 50px;
     transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
     transition: all 0.5s ease 0s;
     width: 300px;
-
 }
 
-.container .box::after {
-    /* background-color: rgb(165, 170, 228); */
-    height: 180px;
-    left: 80px;
-    top: -10px;
-    width: 320px;
-}
-
-
+/* .container .box::after { */
+/* background-color: rgb(165, 170, 228); */
+/* height: 180px;
+        left: 80px;
+        top: -10px;
+        width: 320px;
+    } */
 .container .container-forms {
     position: relative;
     text-align: center;
@@ -131,7 +121,7 @@ body::before {
 
 .container .btn {
     /* background-color: rgb(255, 115, 179);
-    color: rgb(255, 255, 255); */
+        color: rgb(255, 255, 255); */
     cursor: pointer;
     margin: 0 auto;
     opacity: 1;
@@ -145,11 +135,10 @@ body::before {
 }
 
 /* .container .btn,
-.container input {
-    border-radius: 30px;
-    padding: 10px 15px;
-} */
-
+    .container input {
+        border-radius: 30px;
+        padding: 10px 15px;
+    } */
 .container .btn {
     border-radius: 30px;
     padding: 10px 15px;
@@ -171,6 +160,10 @@ body::before {
 
 .container input:hover {
     border: 2px solid #1e5799;
+}
+
+.container input:focus {
+    outline: 0;
 }
 
 .container .container-forms .container-info {
@@ -202,7 +195,6 @@ body::before {
 
 .container .container-forms .container-info .info-item .table-cell {
     padding-right: 35px;
-
 }
 
 .container .container-forms .container-info .info-item:nth-child(2) .table-cell {
@@ -223,24 +215,22 @@ body::before {
 }
 
 /* .container .container-form::before {
-    color: rgb(83, 86, 173);
-    content: "✔";
-    font-size: 130px;
-    left: 160px;
-    opacity: 0;
-    position: absolute;
-    top: -50px;
-    transition: all 0.5s ease 0s;
-} */
-
+        color: rgb(83, 86, 173);
+        content: "✔";
+        font-size: 130px;
+        left: 160px;
+        opacity: 0;
+        position: absolute;
+        top: -50px;
+        transition: all 0.5s ease 0s;
+    } */
 /* .container .container-form .btn {
-    box-shadow: 5px 5px 10px rgba(255, 115, 179, 0.5);
-    display: block;
-    margin-top: 30px;
-    position: relative;
-    width: 120px;
-} */
-
+        box-shadow: 5px 5px 10px rgba(255, 115, 179, 0.5);
+        display: block;
+        margin-top: 30px;
+        position: relative;
+        width: 120px;
+    } */
 /* Cited the gold sign in and sign up button: https://codepen.io/rcherem/pen/Kxpgdr */
 .container .container-form .btn {
     align-content: center;
@@ -288,7 +278,6 @@ body::before {
         inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
 }
 
-
 .container .form-item {
     height: 100%;
     left: 0;
@@ -298,8 +287,6 @@ body::before {
     transition: all 0.5s ease 0s;
     width: 100%;
 }
-
-
 
 .container .form-item.sign-up {
     left: -100%;
@@ -342,55 +329,60 @@ body::before {
 }
 
 /* .container.active .container-form {
-    height: 200px;
-    left: 30px;
-    width: 200px;
-} */
-
+        height: 200px;
+        left: 30px;
+        width: 200px;
+    } */
 /* .container.active .container-form::before {
-    color: rgb(83, 86, 173);
-    content: "✔";
-    font-size: 130px;
-    left: 51px;
-    opacity: 1;
-    position: absolute;
-    top: 5px;
-} */
-
+        color: rgb(83, 86, 173);
+        content: "✔";
+        font-size: 130px;
+        left: 51px;
+        opacity: 1;
+        position: absolute;
+        top: 5px;
+    } */
 /* .container.active input,
-.container.active .btn,
-.container.active .info-item {
-    display: none;
-    height: 0;
-    margin: 0 auto;
-    opacity: 0;
-    padding: 0;
-} */
-
+    .container.active .btn,
+    .container.active .info-item {
+        display: none;
+        height: 0;
+        margin: 0 auto;
+        opacity: 0;
+        padding: 0;
+    } */
 .container.active .form-item {
     height: 100%;
 }
 
 /* .container.active .container-forms .container-info .info-item {
-    height: 0;
-    opacity: 0;
-} */
-
+        height: 0;
+        opacity: 0;
+    } */
 /* .rabbit {
-    bottom: 20px;
-    fill: rgb(255, 255, 255);
-    height: 50px;
-    position: absolute;
-    right: 20px;
-    width: 50px;
-    z-index: 3;
-} */
+        bottom: 20px;
+        fill: rgb(255, 255, 255);
+        height: 50px;
+        position: absolute;
+        right: 20px;
+        width: 50px;
+        z-index: 3;
+    } */
+.missmatch {
+    color: red;
+}
 
+.signInPassVal {
+    color: red;
+    /* display: inline block; */
+    /* text-align: justify; */
+    /* font-size: 10px; */
+}
 
 /**
- * Popup Modal - (_layout.scss) Cited: http://www.styleshout.com/
- * ------------------------------------------------------------------
- */
+     * Popup Modal - (_layout.scss) Cited: http://www.styleshout.com/
+     * ------------------------------------------------------------------
+     */
 .popup-modal {
     max-width: 550px;
     background: #FFFFFF;
@@ -476,56 +468,42 @@ body::before {
     }
 }
 
-/**
- * transition effect for modal popup - (_layout.scss)
- * ------------------------------------------------------------------ 
- */
-
-/* overlay at start */
-.mfp-fade.mfp-bg {
-    opacity: 0;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -webkit-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+/* Password Validation */
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display: none;
+    background: white;
+    color: #000;
+    position: relative;
+    padding: 10px;
+    text-align: left;
+    /* margin-top: 10px; */
 }
 
-/* overlay animate in */
-.mfp-fade.mfp-bg.mfp-ready {
-    opacity: .9;
+#message p {
+    padding: 10px 30px;
+    font-size: 15px;
+    text-align: left;
 }
 
-/* overlay animate out */
-.mfp-fade.mfp-bg.mfp-removing {
-    opacity: 0;
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: #1e5799;
 }
 
-/* content at start */
-.mfp-fade.mfp-wrap .mfp-content {
-    opacity: 0;
-    -webkit-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    transform: translateY(-100%);
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -webkit-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
 }
 
-/* content animate in */
-.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: black;
 }
 
-/* content animate out */
-.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
-    opacity: 0;
-    -webkit-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    transform: translateY(-100%);
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
 }
