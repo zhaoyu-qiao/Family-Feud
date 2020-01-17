@@ -209,6 +209,10 @@ body img {
   border: 4px solid white;
 }
 
+.score-col-holder {
+  
+}
+
 .gameBoard .cardHolder:not(.empty) {
   cursor: pointer;
 }
