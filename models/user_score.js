@@ -1,17 +1,76 @@
+//!!new user score
 // Sequelize (capital) references the standard library
 let Sequelize = require("sequelize");
+let config = require('../config/config.json');
 // sequelize (lowercase) references my connection to the DB.
-let sequelize = require("../config/connection.js");
-
-// Creates a "User_score" model that matches up with DB
-let User_score = sequelize.define("user_score", {
-  user_name: Sequelize.STRING,
-  user_score: Sequelize.INTEGER
-});
-
-
+//let User = require('/models/user.js');
+//console.log(User);
+// Creates a "User" model that matches up with DB
+module.exports = function (sequelize, DataTypes) {
+  let UserScore = sequelize.define("user_score", {
+    id: {
+      type: Sequelize.INTEGER,
+      field: 'id',
+      primaryKey: true
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      field: 'user_id'
+    },
+    score: {
+      type: Sequelize.INTEGER,
+      field: 'score'
+    },
+  }, {
+    tableName: 'user_scores',
+    timestamps: false
+  });
+  return UserScore;
+};
+// UserScore.belongsTo(User, {
+//   foreignKey: 'userId'
+// });
 // Syncs with DB
-User_score.sync();
+// UserScore.sync();
+// Makes the QUestion Model available for other files (will also create a table)
+// module.exports = UserScore;
 
-// Makes the User_score Model available for other files (will also create a table)
-module.exports = User_score;
+
+
+
+// // Sequelize (capital) references the standard library
+// let Sequelize = require("sequelize");
+// let config = require('../config/config.json');
+// // sequelize (lowercase) references my connection to the DB.
+// let sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
+//   host: config.host,
+//   dialect: 'mysql'
+// });
+// //let User = require('/models/user.js');
+// //console.log(User);
+// // Creates a "User" model that matches up with DB
+// let UserScore = sequelize.define("user_score", {
+//   id: {
+//     type: Sequelize.INTEGER,
+//     field: 'id',
+//     primaryKey: true
+//   },
+//   userId: {
+//     type: Sequelize.INTEGER,
+//     field: 'user_id'
+//   },
+//   score: {
+//     type: Sequelize.INTEGER,
+//     field: 'score'
+//   },
+// }, {
+//   tableName: 'user_scores',
+//   timestamps: false
+// });
+// // UserScore.belongsTo(User, { //TODO fix association with User table
+// //   foreignKey: 'userId'
+// // });
+// // Syncs with DB
+// UserScore.sync();
+// // Makes the QUestion Model available for other files (will also create a table)
+// module.exports = UserScore;
