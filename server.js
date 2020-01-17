@@ -1,6 +1,7 @@
 //const db = require("../models");
 // Dependencies
 // =============================================================
+
 let express = require("express");
 let bodyParser = require("body-parser");
 let methodOverride = require("method-override");
@@ -32,6 +33,8 @@ app.listen(PORT, function () {
 //         res.json(question);
 //     });
 // });
+
+
 
 app.get("/api/questions", function (req, res) {
     let question = require('./models/question.js');
@@ -84,5 +87,12 @@ app.get("/api/userscore", function (req, res) {
         res.json(dbUserScore);
     })
 })
+
 require("./routes/html_routes")(app);
+//require("./routes/api-routes")(app);
+
+//require("./routes/authentication")(app);
+
 //require("./routes/familyfued_controlers")(app);
+
+// !!!Need for sign up sign in
