@@ -3,6 +3,24 @@
 
 // let Questions= require('./models/question.js')
 $(document).ready(function () {
+
+    let userName;
+    // get user information from user table  !!!K's version
+    // and updates the HTML on the page
+    // $.get("/api/user_data").then(function (data) {
+    //     $(".member-name").text(data.username);
+    //     console.log(data.username)
+    // });
+
+    // get user information from user table  !!!D's version
+    // and updates the HTML on the page
+    $.get("/api/users").then(function (data) {
+        console.log('User Data: ', data);
+        userName = data.username;
+        $(".member-name").text(userName);
+    });
+
+    // get high score from /api/highscore
     $.get("/api/highscores", function (data) {
         console.log("HISCORES", data)
     })
@@ -129,7 +147,7 @@ $(document).ready(function () {
     let userGuess = $('#playerAnswer-input');
 
     // Timer variables
-    let timeCount = 10;
+    let timeCount = 20;
     let timer;
 
     // Guess status
@@ -200,15 +218,6 @@ $(document).ready(function () {
         event.preventDefault();
         console.log("submit is triggered");
 
-        // buttonClick = true;
-        // let currentQuestion = newQuestions[currentQuestionIndex];
-
-        // Deep clone answers array then change the score of the guessed answer to 0
-        // Cited https://dev.to/samanthaming/how-to-deep-clone-an-array-in-javascript-3cig
-
-        // !!! This should be changed
-        // let tempAnswers = [...currentQuestion.answers]
-        // console.log("Temporary Answers", tempAnswers);
 
 
 
@@ -220,10 +229,6 @@ $(document).ready(function () {
             let guessCorrect = false;
             let tempAnswers = [...currentQuestion.answers]
             console.log("tempAnswers: ", tempAnswers);
-
-            // If the answers does not include the user's answer, say wrong
-            // Array.forEach
-
 
 
             // Loop through the answers in newQuestions[currentQuestionIndex].answers[i], 
@@ -288,12 +293,10 @@ $(document).ready(function () {
         console.log("timeup is called")
         console.log("inside timeup");
 
-
-        // Added on 16
-
+        // display round answers and round score
         displayRoundAnswers();
         displayRoundScore();
-        //displayResults();
+        displayResults();
 
         // call logicInTimeout after 5 seconds;
         setTimeout(logicInTimeout, 5000);
@@ -301,14 +304,13 @@ $(document).ready(function () {
 
     function logicInTimeout() {
 
-        //setTimeout(clearTimer(), 5000);
         clearInterval(timer);
         $('#boardTimer').text(timeCount);
 
         // if the button is not clicked, user's roundScore is 0
         if (document.getElementById('add-playerAnswer').clicked == false) {
-            scoreArray[currentQuestionIndex] += 0;
-            console.log("roundScore", scoreArray[currentQuestionIndex]);
+            // scoreArray[currentQuestionIndex] += 0; 
+            // console.log("roundScore", scoreArray[currentQuestionIndex]);
             $(".scoreRound_" + (currentQuestionIndex + 1)).text('0');
         } else {
             // Next Question or Display Results for a certain time
@@ -316,8 +318,8 @@ $(document).ready(function () {
                 // if user didn't click the button, roundScore+0;
 
                 // show whole result page 
-                displayResults();
-                console.log("Here's your total score!")
+                //displayResults();
+                console.log("Here's your total score!", totalScore)
 
             } else {
                 // !!!show all answers and current score for a certain time!!!
@@ -333,13 +335,13 @@ $(document).ready(function () {
 
     function displayNextQA() {
         console.log("displayNextQA is called")
-        timeCount = 10;
+        timeCount = 20;
         $('#boardTimer').text(timeCount);
         currentQuestionIndex++;
         console.log("Current Question Number: ", currentQuestionIndex + 1)
         // Not sure if it should be here.
 
-        let tempAnswers = [...currentQuestion.answers]
+        // let tempAnswers = [...currentQuestion.answers]
 
         //console.log("question Number+1:", currentQuestionIndex);
         guessCorrect = false;
@@ -370,12 +372,15 @@ $(document).ready(function () {
         // //console.log("Current Question Number: ", currentQuestionIndex + 1);
         // $(".scoreRound_" + (currentQuestionIndex + 1)).text(scoreArray[currentQuestionIndex]);
 
-        // get total score
         console.log('SCORE ARRAY:', scoreArray);
-        scoreArray.forEach(function (roundScore) {
-            totalScore += parseInt(roundScore);
-            //return totalScore;
-        })
+        const reducer = (accumulator, currentValue) => accumulator + currentValue
+        // [1, 2, 3, 4].reduce(reducer) => 10
+        totalScore = scoreArray.reduce(reducer);
+        console.log('NEW SCORE ARRAY', totalScore)
+        // scoreArray.forEach(function (roundScore) {
+        //     totalScore += parseInt(roundScore);
+        //     //return totalScore;
+        // })
 
         console.log('totalScore: ', totalScore);
 
