@@ -7,10 +7,10 @@ $(document).ready(function () {
     let userName;
     // get user information from user table  !!!K's version
     // and updates the HTML on the page
-    // $.get("/api/user_data").then(function (data) {
-    //     $(".member-name").text(data.username);
-    //     console.log(data.username)
-    // });
+    $.get("/api/user_data").then(function (data) {
+        $(".member-name").text(data.username);
+        console.log(data.username)
+    });
 
     // get user information from user table  !!!D's version
     // and updates the HTML on the page
@@ -147,7 +147,7 @@ $(document).ready(function () {
     let userGuess = $('#playerAnswer-input');
 
     // Timer variables
-    let timeCount = 20;
+    let timeCount = 50;
     let timer;
 
     // Guess status
@@ -189,12 +189,12 @@ $(document).ready(function () {
         // Display question and hidden answers
         question.text(newQuestions[currentQuestionIndex].question);
         console.log("current question: ", newQuestions[currentQuestionIndex]);
-        answer1.html('<button>&nbsp&nbsp&nbsp1&nbsp&nbsp&nbsp</button>');
-        answer2.html('<button>&nbsp&nbsp&nbsp2&nbsp&nbsp&nbsp</button>');
-        answer3.html('<button>&nbsp&nbsp&nbsp3&nbsp&nbsp&nbsp</button>');
-        answer4.html('<button>&nbsp&nbsp&nbsp4&nbsp&nbsp&nbsp</button>');
-        answer5.html('<button>&nbsp&nbsp&nbsp5&nbsp&nbsp&nbsp</button>');
-        answer6.html('<button>&nbsp&nbsp&nbsp6&nbsp&nbsp&nbsp</button>');
+        answer1.text('1');
+        answer2.text('2');
+        answer3.text('3');
+        answer4.text('4');
+        answer5.text('5');
+        answer6.text('6');
 
         // Button click status
         // let buttonClick = false;
@@ -335,7 +335,7 @@ $(document).ready(function () {
 
     function displayNextQA() {
         console.log("displayNextQA is called")
-        timeCount = 20;
+        timeCount = 50;
         $('#boardTimer').text(timeCount);
         currentQuestionIndex++;
         console.log("Current Question Number: ", currentQuestionIndex + 1)
