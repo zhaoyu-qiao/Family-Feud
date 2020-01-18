@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Family Fued</title>
     <!-- Latest compiled and minified CSS & JS -->
+
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="./css/game.css" media="screen" title="no title">-->
+    <link rel="stylesheet" href="./css/game.css" media="screen" title="no title">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -38,10 +39,10 @@
                         <div class='cardHolder'>
                             <div class='card' class="cardOne">
                                 <div class='card__face front'>
-                                    <span class='DBG'>1</span>
+                                    <!-- <span class='DBG'>1</span> -->
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer1">coal</span>
+                                    <span class="answer1">1</span>
                                     <b class='LBG' class='answer_score_1'></b>
                                 </div>
                             </div>
@@ -51,10 +52,10 @@
                         <div class='cardHolder'>
                             <div class='card' class="cardFour">
                                 <div class='card__face front'>
-                                    <span class='DBG'>4</span>
+                                    <!-- <span class='DBG'>4</span> -->
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer4"></span>
+                                    <span class="answer4">4</span>
                                     <b class='LBG'></b>
                                 </div>
                             </div>
@@ -64,10 +65,10 @@
                         <div class='cardHolder'>
                             <div class='card'>
                                 <div class='card__face front'>
-                                    <span class='DBG'>2</span>
+                                    <!-- <span class='DBG'>2</span> -->
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer2">candy</span>
+                                    <span class="answer2">2</span>
                                     <b class='LBG'></b>
                                 </div>
                             </div>
@@ -77,10 +78,10 @@
                         <div class='cardHolder'>
                             <div class='card'>
                                 <div class='card__face front'>
-                                    <span class='DBG'>5</span>
+                                    <!-- <span class='DBG'>5</span> -->
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer5"></span>
+                                    <span class="answer5">5</span>
                                     <b class='LBG'></b>
                                 </div>
                             </div>
@@ -90,10 +91,10 @@
                         <div class='cardHolder'>
                             <div class='card'>
                                 <div class='card__face front'>
-                                    <span class='DBG'>3</span>
+                                    <!-- <span class='DBG'>3</span> -->
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer3"></span>
+                                    <span class="answer3">3</span>
                                     <b class='LBG'></b>
                                 </div>
                             </div>
@@ -103,10 +104,10 @@
                         <div class='cardHolder'>
                             <div class='card'>
                                 <div class='card__face front'>
-                                    <span class='DBG'>6</span>
+                                    <!-- <span class='DBG'>6</span> -->
                                 </div>
                                 <div class='card__face back DBG'>
-                                    <span class="answer6"></span>
+                                    <span class="answer6">6</span>
                                     <b class='LBG'></b>
                                 </div>
                             </div>
@@ -116,6 +117,9 @@
             </div>
             <br>
             <br>
+
+            <!--ADD MODAL-->
+
             <!-- <div class='cardHolder empty'>
           <div></div>
         </div>
@@ -143,7 +147,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class='questionHolder'>
-                        <span class='question member-name'>Check Out Your Scores!</span>
+                        <h2 class='question'><span class="member-name"></span>, Check Out Your Scores!</h2>
                     </div>
                 </div>
             </div>
@@ -202,7 +206,7 @@
                     </div>
                     <div class="col-md-6">
                         <div id="suggestions-box">
-                            <a href="/updateGame" id="make-game-better-btn" class='button'><span></span>Update
+                            <a href="/userSuggestions" id="make-game-better-btn" class='button'><span></span>Update
                                 Game!!</a>
                         </div>
                     </div>
