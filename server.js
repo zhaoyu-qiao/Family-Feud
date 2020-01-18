@@ -31,9 +31,9 @@ app.use(passport.session());
 // let routes = require("./routes/familyfeud_controller.js")(app);
 // app.use(routes);
 db.sequelize.sync().then(function () {
-app.listen(PORT, function () {
-    console.log('server listening on: http://localhost:' + PORT);
-});
+    app.listen(PORT, function () {
+        console.log('server listening on: http://localhost:' + PORT);
+    });
 });
 // app.get("/api/questions", function (req, res) {
 //     let question = require('./models/question.js');
@@ -54,7 +54,7 @@ app.get("/api/questions", function (req, res) {
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Question
-   db.question.findAll({
+    db.question.findAll({
             // attribute: 'random()',
             order: [
                 [Sequelize.literal('RAND()')]
