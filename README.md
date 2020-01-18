@@ -1,7 +1,7 @@
 # Family-Feud
 ## Family-Feud Game App : Group Project 2
 
-![Family Feud home page screenshot](/images-ReadMe/small-family-fued-cover.png) 
+![Family Feud home page screenshot](/public/images-ReadMe/small-family-fued-cover.png) 
 
 ## Description
 This app brings you a fun and challenging game, based on longtime favorite game show Family Feud. 
@@ -32,13 +32,13 @@ Click on the below link, go to the home page and click Enter to play!
 ## Database Screenshot
 
 ### Authenticated Users (sample users):
-![Authenticated Users](/images-ReadMe/authenticated-users-db.png) 
+![Authenticated Users](/public/images-ReadMe/authenticated-users-db.png) 
 
 
 
 
 ## The Game Board Screenshot
-![Authenticated Users](/images-ReadMe/game-board.png) 
+![Authenticated Users](/public/images-ReadMe/game-board.png) 
 
 
 
